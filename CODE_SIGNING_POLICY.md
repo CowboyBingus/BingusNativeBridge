@@ -1,6 +1,6 @@
 # Code signing policy
 
-Helldivers 2 only loads plugins with a valid code signature. Signed releases of Bingus Native Bridge are planned through SignPath Foundation's free code signing for open-source projects; this policy describes how they are made. Until signing is in place, releases are unsigned and do not load in the game.
+Helldivers 2 only loads plugins with a valid code signature. Signed releases of Bingus Native Bridge are planned through a free code-signing program for open-source projects; this policy describes how they are made. Until signing is in place, releases are unsigned and do not load in the game.
 
 ## What is signed
 
@@ -16,7 +16,7 @@ Helldivers 2 only loads plugins with a valid code signature. Signed releases of 
 | Reviewers (review every contribution from people without commit access) | [CowboyBingus](https://github.com/CowboyBingus) |
 | Approvers (approve every signing request) | [CowboyBingus](https://github.com/CowboyBingus) |
 
-Every team member uses multi-factor authentication for GitHub and for SignPath.
+Every team member uses multi-factor authentication for GitHub and for the code-signing service.
 
 ## Release process
 

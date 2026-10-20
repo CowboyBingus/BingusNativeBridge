@@ -1,4 +1,4 @@
-> Development release. Helldivers 2 only loads plugins that carry a valid code signature, so unsigned builds of this bridge do not load in the game. Signed releases are planned through SignPath Foundation's free program for open-source projects; see the [code signing policy](CODE_SIGNING_POLICY.md).
+> Development release. Helldivers 2 only loads plugins that carry a valid code signature, so unsigned builds of this bridge do not load in the game. Signed releases are planned through a free code-signing program for open-source projects; see the [code signing policy](CODE_SIGNING_POLICY.md).
 
 # Bingus Native Bridge
 
