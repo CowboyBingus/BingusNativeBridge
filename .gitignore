@@ -1,0 +1,6 @@
+/build/
+/build-*/
+/out/
+/.vs/
+*.user
+__pycache__/

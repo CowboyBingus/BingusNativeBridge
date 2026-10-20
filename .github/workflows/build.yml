@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Windows x64
+    runs-on: windows-2025
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Configure
+        run: cmake -S . -B build -A x64
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Test (mock host and PE audit)
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      - name: Check the build is reproducible
+        shell: pwsh
+        run: |
+          cmake -S . -B build-repro -A x64 -DBNB_BUILD_TESTS=OFF
+          cmake --build build-repro --config Release
+          $name = 'bingus_native_bridge_pluginw64_release.dll'
+          $first = (Get-FileHash "build/Release/$name" -Algorithm SHA256).Hash
+          $second = (Get-FileHash "build-repro/Release/$name" -Algorithm SHA256).Hash
+          if ($first -ne $second) { throw "Builds differ: $first vs $second" }
+          "SHA-256 $first" | Tee-Object -FilePath build/Release/SHA256.txt
+
+      - name: Upload plugin
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: bingus-native-bridge
+          path: |
+            build/Release/bingus_native_bridge_pluginw64_release.dll
+            build/Release/SHA256.txt
+          if-no-files-found: error
