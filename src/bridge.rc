@@ -1,0 +1,32 @@
+// Version resource. The values come from bnb_version.h (CMake project version).
+#include <winver.h>
+#include "bnb_version.h"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION BNB_VERSION_MAJOR, BNB_VERSION_MINOR, BNB_VERSION_PATCH, 0
+PRODUCTVERSION BNB_VERSION_MAJOR, BNB_VERSION_MINOR, BNB_VERSION_PATCH, 0
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEFLAGS 0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL
+FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "CowboyBingus"
+            VALUE "FileDescription", "Bingus Native Bridge: engine plugin for Helldivers 2 mods"
+            VALUE "FileVersion", BNB_VERSION_STRING
+            VALUE "InternalName", BNB_PLUGIN_NAME
+            VALUE "LegalCopyright", "Copyright (C) 2026 CowboyBingus. BSD Zero Clause License."
+            VALUE "OriginalFilename", BNB_FILE_NAME
+            VALUE "ProductName", BNB_PRODUCT_NAME
+            VALUE "ProductVersion", BNB_VERSION_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
