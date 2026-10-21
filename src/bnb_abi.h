@@ -24,7 +24,11 @@ struct bnb_plugin_table {
     void (*setup_game)(bnb_get_api); /* 0x58 Lua accepts module functions from here on */
     void *unused_60;                 /* 0x60 per-frame hook: deliberately left empty */
     void (*shutdown_game)(void);     /* 0x68 */
-    void *unused_70[39];             /* 0x70 world, unit and render hooks, reserved space */
+    void *unused_70[4];              /* 0x70 register_world .. 0x88 units_unspawned */
+    void (*debug_draw)(void *world, void *srs); /* 0x90 required non-null by the engine loader */
+    void *unused_98;                 /* 0x98 get_render_env */
+    void (*render)(void *arguments); /* 0xa0 required non-null by the engine loader */
+    void *unused_a8[32];             /* 0xa8 reserved space through 0x1a7 */
 };
 
 /* Positions of the engine Lua table entries this plugin reads. */
@@ -46,6 +50,8 @@ BNB_ABI_ASSERT(sizeof(void *) == 8, x64_only);
 BNB_ABI_ASSERT(offsetof(struct bnb_plugin_table, setup_game) == 0x58, setup_game_at_0x58);
 BNB_ABI_ASSERT(offsetof(struct bnb_plugin_table, unused_60) == 0x60, frame_hook_at_0x60);
 BNB_ABI_ASSERT(offsetof(struct bnb_plugin_table, shutdown_game) == 0x68, shutdown_game_at_0x68);
+BNB_ABI_ASSERT(offsetof(struct bnb_plugin_table, debug_draw) == 0x90, debug_draw_at_0x90);
+BNB_ABI_ASSERT(offsetof(struct bnb_plugin_table, render) == 0xa0, render_at_0xa0);
 BNB_ABI_ASSERT(sizeof(struct bnb_plugin_table) == 0x1a8, plugin_table_size);
 
 #endif

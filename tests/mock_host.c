@@ -153,8 +153,17 @@ int main(int argc, char **argv)
     check(plugin->unused_60 == NULL, "no per-frame hook");
     for (i = 0; i < 10; ++i)
         check(plugin->unused_08[i] == NULL, "load, reload and resource hooks unused");
-    for (i = 0; i < 39; ++i)
-        check(plugin->unused_70[i] == NULL, "world, unit and render hooks unused");
+    for (i = 0; i < 4; ++i)
+        check(plugin->unused_70[i] == NULL, "world and unit hooks unused");
+    /* The engine's plugin loader rejects a table whose debug_draw (0x90) or
+     * render (0xa0) entries are null, so v0.1 supplies no-op stubs. */
+    check(plugin->debug_draw != NULL && plugin->render != NULL,
+          "render hooks present for the engine loader");
+    check(plugin->unused_98 == NULL, "render environment hook unused");
+    for (i = 0; i < 32; ++i)
+        check(plugin->unused_a8[i] == NULL, "reserved hooks unused");
+    plugin->debug_draw(NULL, NULL);
+    plugin->render(NULL);
 
     /* Refusals: no engine API, no Lua table, a missing entry. */
     plugin->setup_game(NULL);

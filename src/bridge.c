@@ -161,6 +161,20 @@ static const char *get_name(void)
     return BNB_PLUGIN_NAME;
 }
 
+/* The engine's game-plugin loader requires non-null debug_draw (0x90) and
+ * render (0xa0) entries even for a plugin that never draws. These stubs keep
+ * the table valid; v0.1 does no rendering and no per-frame work. */
+static void debug_draw_stub(void *world, void *srs)
+{
+    (void)world;
+    (void)srs;
+}
+
+static void render_stub(void *arguments)
+{
+    (void)arguments;
+}
+
 static void setup_game(bnb_get_api get_engine_api)
 {
     int i;
@@ -189,6 +203,8 @@ static struct bnb_plugin_table plugin_table = {
     .get_name = get_name,
     .setup_game = setup_game,
     .shutdown_game = shutdown_game,
+    .debug_draw = debug_draw_stub,
+    .render = render_stub,
 };
 
 /* The only export. The engine calls it after loading the plugin. */
