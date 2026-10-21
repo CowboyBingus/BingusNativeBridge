@@ -25,7 +25,7 @@ Full reference: [Lua API](docs/API.md). Later versions add functions one by one,
 - It is loaded by the game's own plugin system from `bin/plugins`, like the game's stock plugins.
 - Nothing runs when the DLL is loaded: it has no entry point and imports no other DLLs. Its only export is the engine's plugin handshake.
 - When the game sets up Lua, it registers the `BingusBridge` functions; when the game shuts down, it removes them.
-- It has no per-frame work. Its functions run only when a mod calls them.
+- It supplies the engine's required `debug_draw` and `render` plugin hooks as no-ops; it has no per-frame work, and its functions run only when a mod calls them.
 - It reads and writes no game memory, opens no files and makes no network connections.
 - It does not modify the game's files or code and does not work around the game's anti-cheat or its signature checks.
 

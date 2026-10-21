@@ -34,7 +34,7 @@ end
 
 Tier 0. No arguments.
 
-Returns the bridge version as a string (`"0.1.0"`) and the API level as a number (`1`).
+Returns the bridge version as a string (`"0.1.1"`) and the API level as a number (`1`).
 
 ### `BingusBridge.capabilities()`
 

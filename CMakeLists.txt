@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(BingusNativeBridge VERSION 0.1.0 LANGUAGES C RC)
+project(BingusNativeBridge VERSION 0.1.1 LANGUAGES C RC)
 
 if(NOT MSVC OR NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(FATAL_ERROR "Bingus Native Bridge builds with MSVC for 64-bit Windows only.")
